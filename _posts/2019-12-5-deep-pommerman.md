@@ -9,7 +9,8 @@ Reinforcement learning has been used to solve a number of challenging games rece
 
 How can we train agents capable of working and communicating together in a 2v2 competition? That is one of the core questions of the Pommerman competition this year (2019). Each agent must learn to not only manage aggressive strategies that can result in accidental suicide, it must also learn to predict and account for the actions of its teammate and enemies.
 
-
+## The Challenge of Bombs
+As mentioned in a few papers in our references below, bombs make for an inherently difficult learning environment. Most learning agents tend to learn that placing bombs usually results in a negative reward (often by accidental suicides), therefore one should never place them. However, this results in a strategy which can only tie against competent enemy agents at best. This is one aspect of Pommerman that makes it significantly harder to learn from than most other environments and one thing that inspired our first improvement below.
 
 # Our Approach
 
@@ -57,6 +58,8 @@ This is an example of our agent overfitting to the strategy of the enemy agent, 
 
 ## Improvements
 
+How can we improve on existing agents? Our answers focused primarily on the solutions below.
+
 ### Curricula
 
 One of our primary successes was in the development of a curriculum of lessons that agents had to achieve a certain level of ability on in order to move to successive lessons. We did this by varying the environment clutter (destructible boxes, indestructible obstacles), agent starting position, and enemy agent difficulty/AI.
@@ -90,7 +93,10 @@ Training efficiency increased notably with our CNN architecture as compared to o
 
 # Results
 
-We were able to beat the baseline deterministic agent, SimpleAgent, consistently with most of our trained agents. A detailed review of each agent's performance can be seen on our [Leaderboard](/leaderboards/). 
+We were able to beat the baseline deterministic agent, SimpleAgent, consistently with most of our trained agents. A detailed review of each agent's performance can be seen on our [Leaderboard](/leaderboards/). In the short playthrough below, the Skynet6407 team (red) beats a team of 2 SimpleAgents (blue) by trapping the first one, and then tricking the second one.
+
+![Skynet6407 winning against SimpleAgent](skynet6407vsSimpleAgent.gif)
+
 
 The Skynet agent we trained ourselves from scratch, combining their reward structure with our curriculum, also achieved marginally better performance than the agent they entered in last year's competition, though in matches against each other, both agents usually tie as the action filter they use tends to make them over-cautious. One interesting note is that our version tends to complete matches faster/is slightly more aggressive--this is likely because we had it train so much against non-moving agents with fewer timesteps given before the end of each episode.
 
