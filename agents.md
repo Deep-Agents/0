@@ -67,7 +67,7 @@ This agent was trained on a 4x4 board against a variety of increasingly difficul
  
 Following this training regimen, the agent was transferred to a 6x6 board, where it completed another 50M training steps against the random (no bomb) agent. 
 # Bugfinder
-This agent was trained on a 8x8 empty board against SimpleAgent, using generic PPO algorithm provided by [stable-baseline](https://stable-baselines.readthedocs.io/en/master/index.html). It interestingly and surprisingly learned a bug inside implementation of SimpleAgent, and exploited it to win. See our blog post for detail.
+This agent was trained on a 8x8 empty board against SimpleAgent with 5 million iterations, using generic PPO algorithm provided by [stable-baseline](https://stable-baselines.readthedocs.io/en/master/index.html). The policy network is also a generic one with 2 fully connected layers. It interestingly and surprisingly learned a bug inside implementation of SimpleAgent, and exploited it to win. See our blog post for detail.
 
 # CNN Agent
 This agent was also trained with PPO algorithm provided by [stable-baseline](https://stable-baselines.readthedocs.io/en/master/index.html), but with a custom CNN policy network. See our blog post for detailed CNN architecture explanation.
