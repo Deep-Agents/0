@@ -142,14 +142,14 @@ Environmental board size curriculum refers to a sequence of 6 training lessons i
 </table>
 
 ![](../images/curric-box.gif)
-Our curriculum in 11x11 board
+*Our curriculum in 11x11 board*
 
 After training each lesson on 5 million iterations, we get an agent that learns the "first taste of blood". It learns how to approach the agent, drop a bomb, kill the opponent, and escape to avoid killing itself. In addition, with randomization of the starting position of all of the agents and positions of the destructible boxes, it turns out that our trained agent can also find where the opponent is.
 ![](../images/5M_lesson5_customCNN.gif)
-Out agent learns the first taste of blood
+*Out agent learns the first taste of blood*
 
 ![](../images/6x6_curriculum_reward.JPG)
-Reward curve
+*Reward curve*
 
 Even in a larger board with more boxes, our trained agent can still find a reasonably short path to the opponent and kill it efficiently.
 ![](../images/11x11_currculum_empty.gif)
@@ -176,6 +176,8 @@ One of the Skynet agents we trained ourselves, Skynet6407, achieved better perfo
 # Lessons Learned
 
 [Reinforcement learning is hard!](https://www.alexirpan.com/2018/02/14/rl-hard.html)
+![](../images/fridge.jpg)
+*Invest in Proper Cooling*
 
 ## Parallelize!
 
