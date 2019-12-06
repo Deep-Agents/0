@@ -110,7 +110,8 @@ If we had realized the importance of distributed computing and parallelization s
 
 ## Do Imitation Learning First! (If Possible)
 
-Only towards the end did we realize how much more effective we could have been if we had started with an agent that learned to imitate from some known decent agent (human or deterministic). Only towards the end of our time did we discover [this work](https://github.com/eugene/pommerman) which went through many of the challenges we did and settled on imitation learning for decent performance. We likely could have imitated the best agents in last year's competition to get our baseline agents, and then trained on multi-agent communication from there.
+Only towards the end did we realize how much more effective we could have been if we had started with an agent that learned to imitate from some known decent agent (human or deterministic). Only towards the end of our time did we discover [this work](https://github.com/eugene/pommerman) which went through many of the challenges we did and settled on imitation learning for decent performance. We likely could have imitated the best agents in last year's competition to get our baseline agents, and then trained on multi-agent communication from there. DeepMind again agrees on the importance of imitation learning for RL agents:
+>Learning human strategies, and ensuring that the agents keep exploring those strategies throughout self-play, was key to unlocking AlphaStar’s performance. To do this, we used imitation learning – combined with advanced neural network architectures and techniques used for language modelling – to create an initial policy which played the game better than 84% of active players
 
 
 # References
@@ -128,3 +129,4 @@ Only towards the end did we realize how much more effective we could have been i
 1. Gao, Chao, et al. "On hard exploration for reinforcement learning: A case study in pommerman." Proceedings of the AAAI Conference on 1. Artificial Intelligence and Interactive Digital Entertainment. Vol. 15. No. 1. 2019.
 1. Perez-Liebana, Diego, et al. "Analysis of Statistical Forward Planning Methods in Pommerman." Proceedings of the AAAI Conference on 1. Artificial Intelligence and Interactive Digital Entertainment. Vol. 15. No. 1. 2019.
 1. Kartal, Bilal, Pablo Hernandez-Leal, and Matthew E. Taylor. "Terminal Prediction as an Auxiliary Task for Deep Reinforcement Learning." Proceedings of the AAAI Conference on Artificial Intelligence and Interactive Digital Entertainment. Vol. 15. No. 1. 2019.
+1. Vinyals, O., Babuschkin, I., Czarnecki, W.M. et al. Grandmaster level in StarCraft II using multi-agent reinforcement learning. Nature 575, 350–354 (2019)
