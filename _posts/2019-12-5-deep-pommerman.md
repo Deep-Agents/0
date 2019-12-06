@@ -88,8 +88,30 @@ We also varied the nature and density of the obstacles encountered by the agents
 
 ![](../images/curric-box.gif)
 
+Environmental board size curriculum refers to a sequence of 6 training lessons in a fixed-size board with increasing number of destructible boxes. We designed such a curriculum in a 6x6 board with 2, 4, 6, 8, 10, 12 destructible boxes respectively. We reward the agent for destruct each box, but the overall reward of destructing all of the boxes is only 1/10 of killing an opponent. Therefore, the agent would not stay too long on the board and risk its life on destructing boxes. We also reward the agent for finish quickly, that is, gives a small negative reward each timestep to the agent. In our initial training, we decided to train our agent against a static agent because we want our agent to learn to actually drop bomb and kill the opponent. Thus, our curriculum set up is the following:
 
+| Lesson | Number of destructible boxes | board size |   opponent   |
+|:------:|:----------------------------:|:----------:|:------------:|
+|    0   |               2              |     6x6    | static agent |
+|    1   |               4              |     6x6    | static agent |
+|    2   |               6              |     6x6    | static agent |
+|    3   |               8              |     6x6    | static agent |
+|    4   |              10              |     6x6    | static agent |
+|    5   |              12              |     6x6    | static agent |
 
+![](../images/curric-box.gif)
+Our curriculum in 11x11 board
+
+After training each lesson on 5 million iterations, we get an agent that learns the "first taste of blood". It learns how to approach the agent, drop a bomb, kill the opponent, and escape to avoid killing itself. In addition, with randomization of the starting position of all of the agents and positions of the destructible boxes, it turns out that our trained agent can also find where the opponent is.
+![](../images/5M_lesson5_customCNN.gif)
+Out agent learns the first taste of blood
+
+![](../images/6x6_curriculum_reward.JPG)
+Reward curve
+
+Even in a larger board with more boxes, our trained agent can still find a reasonably short path to the opponent and kill it efficiently.
+![](../images/11x11_currculum_empty.gif)
+![](../images/11x11_currculum_box.gif)
 
 ### Network Architecture
 
