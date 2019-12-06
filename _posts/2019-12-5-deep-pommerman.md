@@ -61,6 +61,7 @@ This is an example of our agent overfitting to the strategy of the enemy agent, 
 
 One of our primary successes was in the development of a curriculum of lessons that agents had to achieve a certain level of ability on in order to move to successive lessons. We did this by varying the environment clutter (destructible boxes, indestructible obstacles), agent starting position, and enemy agent difficulty/AI.
 
+#### Board Size
 In our experiments with the board size curriculum, the 11x11 board was walled up with indestructible blocks, leaving only a smaller central portion exposed for the agents to move in. Agents were progressively trained from a minimum board size of 4x4 up to the maximum 11x11 board. 
 
 ![](../images/env-shaping.gif)
@@ -70,6 +71,14 @@ One advantage of implementing the board size curriculum in this manner was that 
 ![](../images/WTLvsSize.png)
 
 The agent trained extensively on a 4x4 board still showed respectable performance on larger board sizes, exhibiting a _graceful_ decline. 
+
+Another set of experiments were performed to compare the time to converge for agents trained from scratch, as a function of board size. Surprisingly, larger board sizes were associated with faster convergence. Below, the orange trace shows episode reward on a 4x4 board, blue on a 5x5 board, and pink on a 6x6 board.
+
+![](../images/ConvergenceVsBoardSize.png)
+
+On viewing some of the playouts of these games, we discovered that larger boards resulted in faster convergence due to a pathological behavior of the RandomAgent opponent, which chose actions randomly. On a larger board, it is less likely for an opponent to place a bomb near our trained agent. Our agent quickly learned to recede to a corner and wait for its opponent to commit suicide.
+
+#### Environmental obstacles
 
 ![](../images/curric-box.gif)
 
