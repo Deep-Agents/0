@@ -83,14 +83,14 @@ On viewing some of the playouts of these games, we discovered that larger boards
 
 #### Environmental obstacles
 Environmental board size curriculum refers to a sequence of 6 training lessons in a fixed-size board with increasing number of destructible boxes. We designed such a curriculum in a 6x6 board with 2, 4, 6, 8, 10, 12 destructible boxes respectively. We reward the agent for destruct each box, but the overall reward of destructing all of the boxes is only 1/10 of killing an opponent. Therefore, the agent would not stay too long on the board and risk its life on destructing boxes. We also reward the agent for finish quickly, that is, gives a small negative reward each timestep to the agent. In our initial training, we decided to train our agent against a static agent because we want our agent to learn to actually drop bomb and kill the opponent. Thus, our curriculum set up is the following:
-Lesson index  | Number of destructible boxes | board size | opponent
-------------- | ---------------------------- | ---------- | --------
-      0       |              2               |    6x6     |  static agent
-      1       |              4               |    6x6     |  static agent
-      2       |              6               |    6x6     |  static agent
-      3       |              8               |    6x6     |  static agent
-      4       |              10              |    6x6     |  static agent
-      5       |              12              |    6x6     |  static agent
+| Lesson | Number of destructible boxes | board size |   opponent   |
+|:------:|:----------------------------:|:----------:|:------------:|
+|    0   |               2              |     6x6    | static agent |
+|    1   |               4              |     6x6    | static agent |
+|    2   |               6              |     6x6    | static agent |
+|    3   |               8              |     6x6    | static agent |
+|    4   |              10              |     6x6    | static agent |
+|    5   |              12              |     6x6    | static agent |
 ![](../images/curric-box.gif)
 Our curriculum in 11x11 board
 
