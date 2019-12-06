@@ -56,6 +56,17 @@ This agent took into account everything we had learned from previously trained a
 
 Looking at our leaderboard, this agent seems to achieve slightly better performance than Skynet955, which hopefully is an indicator of the effectiveness of our curriculum.
 
+#### Imitation256
+
+This agent was taken from [pommerman-baselines](https://github.com/tambetm/pommerman-baselines) where data was collected on the Simple agent and this agent was trained to imitate this behaviour. It was then trained on 5000 games.
+
+#### MCTS256
+
+This agent uses Monte Carlo tree search with neural network guidance. It was then trained on 5000 games.
+
+#### MCTS
+
+This agent does pure Monte Carlo tree search.
 
 
 # 300M Timestep Agent
@@ -67,7 +78,7 @@ This agent was trained on a 4x4 board against a variety of increasingly difficul
  
 Following this training regimen, the agent was transferred to a 6x6 board, where it completed another 50M training steps against the random (no bomb) agent. 
 # Bugfinder
-This agent was trained on a 8x8 empty board against SimpleAgent with 5 million iterations, using generic PPO algorithm provided by [stable-baseline](https://stable-baselines.readthedocs.io/en/master/index.html). The policy network is also a generic one with 2 fully connected layers. It interestingly and surprisingly learned a bug inside implementation of SimpleAgent, and exploited it to win. See [our blog post](/deep-pommerman/) for detailed information.
+This agent was trained on a 8x8 empty board against SimpleAgent with 5 million iterations, using generic PPO algorithm provided by [stable-baseline](https://stable-baselines.readthedocs.io/en/master/index.html). The policy network is also a generic one with 2 fully connected layers. It interestingly and surprisingly learned a bug inside implementation of SimpleAgent, and exploited it to win. See our blog post for detail.
 
 # CNN Agent
 This agent was also trained with PPO algorithm provided by [stable-baseline](https://stable-baselines.readthedocs.io/en/master/index.html), but with a custom CNN policy network. See [our blog post](/deep-pommerman/) for detailed CNN architecture explanation.
