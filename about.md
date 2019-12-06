@@ -8,7 +8,7 @@ permalink: /about/
 * [Siwat Herabat](mailto:herabat@usc.edu)
 * [Kingson Man](mailto:kman@usc.edu)
 * [Ankith Mohan](mailto:ankithmo@usc.edu)
-* [Micheal Swan](mailto:rmswan@usc.edu)
+* [Michael Swan](mailto:rmswan@usc.edu)
 * [Yulun Zhang](mailto:yulunzha@usc.edu)
 
 ### More Information
