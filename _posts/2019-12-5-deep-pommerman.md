@@ -3,7 +3,7 @@ layout: post
 title: Solving Pommerman with Deep Reinforcement Learning
 ---
 
-Reinforcement learning has been used to solve a number of challenging games recently. That said, there are many games that are as of yet unsolved or require a lot of domain knowledge in order to create intelligent agents. Pommerman, a bomberman clone ([further described here](/pom_info/)) provides a simple environment with fun and intuitive dynamics which are surprisingly deep.
+Reinforcement learning has been used to solve a number of challenging games recently. That said, there are many games that are as of yet unsolved or require a lot of domain knowledge in order to create intelligent agents. Pommerman, a bomberman clone ([further described here](/pom_info/)) provides a simple environment with fun and intuitive dynamics which are surprisingly deep. In Pommerman, players must place bombs to destroy boxes and each other. Bombs are all timed, blowing up after a short time. When time runs out or only 1 team/player is left, the game ends. More information on the details of the Pommerman environment and annual NeurIPS competition can be found [at the official website](https://www.pommerman.com/).
 
 # Problem Summary
 
