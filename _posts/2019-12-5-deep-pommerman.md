@@ -98,7 +98,7 @@ We were able to beat the baseline deterministic agent, SimpleAgent, consistently
 ![Skynet6407 winning against SimpleAgent](../images/skynet6407vsSimpleAgent.gif)
 
 
-The Skynet agent we trained ourselves from scratch, combining their reward structure with our curriculum, also achieved marginally better performance than the agent they entered in last year's competition, though in matches against each other, both agents usually tie as the action filter they use tends to make them over-cautious. One interesting note is that our version tends to complete matches faster/is slightly more aggressive--this is likely because we had it train so much against non-moving agents with fewer timesteps given before the end of each episode.
+One of the Skynet agents we trained ourselves, Skynet6407, achieved better performance than the original Skynet competition agent (Skynet955). This was done without using existing checkpoints/weights, instead combining their reward structure with our curriculum. Skynet6407 never trained against Skynet955, so in matches against each other, both agents usually tie. This is likely because the action filter they use tends to make them over-cautious. One interesting note is that our version tends to complete matches faster/is slightly more aggressive--this is likely because we had it train so much against non-moving agents with fewer timesteps given per episode.
 
 # Lessons Learned
 
