@@ -56,15 +56,19 @@ This agent took into account everything we had learned from previously trained a
 
 Looking at our leaderboard, this agent seems to achieve slightly better performance than Skynet955, which hopefully is an indicator of the effectiveness of our curriculum.
 
-# Imitation256
+# Pommerman-baseline agents
 
-This agent was taken from [pommerman-baselines](https://github.com/tambetm/pommerman-baselines) where data was collected on the Simple agent and this agent was trained to imitate this behaviour. It was then trained on 5000 games.
+These agents were taken from [pommerman-baselines](https://github.com/tambetm/pommerman-baselines).
 
-# MCTS256
+#### Imitation256
+
+The data collected on the Simple agent was used to train this agent to imitate that behaviour. It was then trained on 5000 games.
+
+#### MCTS256
 
 This agent uses Monte Carlo tree search with neural network guidance. It was then trained on 5000 games.
 
-# MCTS
+#### MCTS
 
 This agent does pure Monte Carlo tree search.
 
