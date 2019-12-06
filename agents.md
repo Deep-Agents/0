@@ -56,9 +56,13 @@ This agent took into account everything we had learned from previously trained a
 
 Looking at our leaderboard, this agent seems to achieve slightly better performance than Skynet955, which hopefully is an indicator of the effectiveness of our curriculum.
 
+# Pommerman-baseline agents
+
+These agents were taken from [pommerman-baselines](https://github.com/tambetm/pommerman-baselines).
+
 #### Imitation256
 
-This agent was taken from [pommerman-baselines](https://github.com/tambetm/pommerman-baselines) where data was collected on the Simple agent and this agent was trained to imitate this behaviour. It was then trained on 5000 games.
+The data collected on the Simple agent was used to train this agent to imitate that behaviour. It was then trained on 5000 games.
 
 #### MCTS256
 
