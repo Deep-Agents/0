@@ -61,7 +61,16 @@ This is an example of our agent overfitting to the strategy of the enemy agent, 
 
 One of our primary successes was in the development of a curriculum of lessons that agents had to achieve a certain level of ability on in order to move to successive lessons. We did this by varying the environment clutter (destructible boxes, indestructible obstacles), agent starting position, and enemy agent difficulty/AI.
 
+In our experiments with the board size curriculum, the 11x11 board was walled up with indestructible blocks, leaving only a smaller central portion exposed for the agents to move in. Agents were progressively trained from a minimum board size of 4x4 up to the maximum 11x11 board. 
+
 ![](../images/env-shaping.gif)
+
+One advantage of implementing the board size curriculum in this manner was that the underlying observation space remained a constant 11x11 through all experiments, allowing the same agent to be trained and evaluated in different environment sizes. Below, we show the performance of the longest-trained agent in our experiments, at 300 million timesteps, on different board sizes. 
+
+![](../images/WTLvsSize.png)
+
+The agent trained extensively on a 4x4 board still showed respectable performance on larger board sizes, exhibiting a _graceful_ decline. 
+
 ![](../images/curric-box.gif)
 
 ### Network Architecture
