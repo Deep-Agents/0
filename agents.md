@@ -59,7 +59,13 @@ Looking at our leaderboard, this agent seems to achieve slightly better performa
 
 
 # 300M Timestep Agent
-
+This agent was trained on a 4x4 board against a variety of increasingly difficult opponents: 
+  - static agent
+  - static agent spawning at random locations
+  - random agent that never uses bombs
+  - random agent that uses bombs
+ 
+Following this training regimen, the agent was transferred to a 6x6 board, where it completed another 50M training steps against the random (no bomb) agent. 
 # Bugfinder
 
 # CNN Agent
