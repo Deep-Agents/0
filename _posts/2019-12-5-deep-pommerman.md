@@ -3,21 +3,23 @@ layout: post
 title: Solving Pommerman with Deep Reinforcement Learning
 ---
 
-Reinforcement learning has been used to solve a number of challenging games recently. That said, there are many games that are as of yet unsolved or require a lot of domain knowledge in order to create intelligent agents. Pommerman, a bomberman clone ([further described here](/pom_info/)) provides a simple environment with fun and intuitive dynamics which are surprisingly deep. In Pommerman, players must place bombs to destroy boxes and each other. Bombs are all timed, blowing up after a short time. When time runs out or only 1 team/player is left, the game ends. More information on the details of the Pommerman environment and annual NeurIPS competition can be found [at the official website](https://www.pommerman.com/).
+Reinforcement learning has been used to solve a number of challenging games recently. That said, there are many games that are as of yet unsolved or require a lot of domain knowledge in order to create intelligent agents. Pommerman, a bomberman clone ([further described here](/pom_info/)) provides a simple environment with fun and intuitive dynamics which are surprisingly deep.
 
 # Problem Summary
 
 How can we train agents capable of working and communicating together in a 2v2 competition? That is one of the core questions of the Pommerman competition this year (2019). Each agent must learn to not only manage aggressive strategies that can result in accidental suicide, it must also learn to predict and account for the actions of its teammate and enemies.
 
 ## The Challenge of Bombs
-As mentioned in a few papers in our references below, bombs make for an inherently difficult learning environment. Most learning agents tend to learn that placing bombs usually results in a negative reward (often by accidental suicides), therefore one should never place them. However, this results in a strategy which can only tie against competent enemy agents at best. This is one aspect of Pommerman that makes it significantly harder to learn from than most other environments and one thing that inspired our first improvement below.
+As mentioned in a few papers from our references, the unforgiving nature of bombs make for an inherently difficult learning environment. Bombs can kill not only your opponent but also yourself. The placement of a bomb is one action out of six available to the agent, so the training's early stages can resemble Russian Roulette. For a relatively unskilled agent, the placement of a bomb is most often associated with a large negative reward - that is, accidental suicide. Most learning agents therefore take away the lesson that one should never use bombs. However, this results in an unviable strategy of timidity, which, at best, can only result in a tie against a competent opponent. 
+
+The secret to winning is to gain a healthy appetite for risk. The embrace of the risk of a bomb is a huge hump for any learning agent to get over, and is what makes Pommerman significantly harder to learn from than many other environments. It is also the attribute that inspired our first improvement described below.
 
 # Our Approach
 
-In general our approach can be summarized as: attempt to use existing agents and work from there. Failing that, we work on the problem from scratch.
+In general our approach can be summarized as: attempt to re-use existing trained agents and work from there. Failing that, we work on training agents from scratch.
 
 ## Existing Agent Use
-The first place learning agent (4th overall) from last year, [Navocado](https://arxiv.org/abs/1812.07297), has a much stronger and more general approach to reinforcement learning agent development, using an ensemble of agents and hyperparameter search with some ideas that are similar to [IMAPLA](https://arxiv.org/abs/1802.01561) from Google's DeepMind, however it was neigh impossible to replicate their work with our time constraints as their code was not well documented and relies on a distributed computing setup with orchestrated Docker containers.
+The first place learning agent (4th overall) from last year's Pommerman competition at NeurIPS, [Navocado](https://arxiv.org/abs/1812.07297), has a much stronger and more general approach to reinforcement learning agent development, using an ensemble of agents and hyperparameter search with some ideas that are similar to [IMPALA](https://arxiv.org/abs/1802.01561) from Google's DeepMind, however it was nigh impossible to replicate their work with our time constraints as their code was not well documented and relies on a distributed computing setup with orchestrated Docker containers.
 
 MAGNet was another reinforcement learning network for Pommerman we tried to use, but it also had serious compute requirements (it was an order of magnitude slower to train than other agents we tried) which we hoped to avoid with our own more lightweight approaches.
 
@@ -45,15 +47,14 @@ In general, our agents did not seem to learn very complex strategies. It is uncl
 
 ### Bomb Handling Depression
 
-Skynet agents all would get depressed and stop placing bombs after one their teammates died. We believe this was due to the way team spirit rewards were handled, but did not find a good way of getting rid of this behavior.
+Skynet agents all would get depressed and stop placing bombs after one their teammates died. We believe this was due to the way "team spirit" rewards were handled, but did not find a good way of getting rid of this behavior.
 ![](../images/skynet-depressed.gif)
 
 ### Exploiting bugs in enemies strategies
-The built-in deterministic agent (SimpleAgent) has a few bugs in its AI that our agents learned to take advantage of in order to make it suicide (basically if you sit in a certain spot in relation to SimpleAgent, it will stay there and place a bomb on itself). 
+The built-in deterministic agent (SimpleAgent) has a few bugs in its AI that our agents learned to take advantage of, to cause it to commit suicide. If our trained agent sat in a certain spot in relation to the SimpleAgent, it would consistently stay in position. Eventually, it would place a bomb while continuing not to move, and end up killing itself. 
 ![](../images/simpleAgent-bug.gif)
-This is an example of our agent overfitting to the strategy of the enemy agent, as it is highly unlikely this precise strategy would work on any other agents. It was avoided by varying the enemy agents our agent had to train against (to a simple extent). This is a sentiment that [DeepMind's AlphaStar team](https://deepmind.com/blog/article/AlphaStar-Grandmaster-level-in-StarCraft-II-using-multi-agent-reinforcement-learning) also seems to agree with:
->The key insight of the League is that playing to win is insufficient: instead, we need both main agents whose goal is to win versus everyone, and also exploiter agents that focus on helping the main agent grow stronger by exposing its flaws, rather than maximising their own win rate against all players. Using this training method, the League learns all its complex StarCraft II strategy in an end-to-end, fully automated fashion
-
+This is an example of our agent overfitting to the quirks of the enemy agent, as it is highly unlikely this precise strategy would work on any other opponent. We tried to avoid overfitting to any particular agent by varying the opponent agents. This is a sentiment that [DeepMind's AlphaStar team](https://deepmind.com/blog/article/AlphaStar-Grandmaster-level-in-StarCraft-II-using-multi-agent-reinforcement-learning) also seems to agree with:
+>The key insight of the League is that playing to win is insufficient: instead, we need both main agents whose goal is to win versus everyone, and also exploiter agents that focus on helping the main agent grow stronger by exposing its flaws, rather than maximising their own win rate against all players. Using this training method, the League learns all its complex StarCraft II strategy in an end-to-end, fully automated fashion.
 
 
 ## Improvements
@@ -62,50 +63,33 @@ How can we improve on existing agents? Our answers focused primarily on the solu
 
 ### Curricula
 
-One of our primary successes was in the development of a curriculum of lessons that agents had to achieve a certain level of ability on in order to move to successive lessons. We did this by varying the environment clutter (destructible boxes, indestructible obstacles), agent starting position, and enemy agent difficulty/AI.
+One of our primary successes was in the development of a curriculum of lessons on which agents had to achieve a certain level of compentency, before moving to successive lessons. We did this by varying the density of obstacles in the environment (such as destructible boxes and indestructible walls), agent starting positions, and opponent strategy/difficulty.
 
 #### Board Size
-In our experiments with the board size curriculum, the 11x11 board was walled up with indestructible blocks, leaving only a smaller central portion exposed for the agents to move in. Agents were progressively trained from a minimum board size of 4x4 up to the maximum 11x11 board. 
+In our experiments with the board size curriculum, the 11x11 board was walled up with indestructible blocks, leaving only a smaller central portion exposed for the agents to move within. Agents were progressively trained from a minimum board size of 4x4 up to the maximum 11x11 board. 
 
 ![](../images/env-shaping.gif)
 
-One advantage of implementing the board size curriculum in this manner was that the underlying observation space remained a constant 11x11 through all experiments, allowing the same agent to be trained and evaluated in different environment sizes. Below, we show the performance of the longest-trained agent in our experiments, at 300 million timesteps, on different board sizes. 
+One advantage of implementing the board size curriculum in this manner was that the underlying observation space remained a constant 11x11 through all experiments, allowing the same agent to be trained and evaluated in different environment sizes. Below, we show the performance of the longest-trained agent in our experiments, at 300 million timesteps, on different board sizes.
 
 ![](../images/WTLvsSize.png)
 
 The agent trained extensively on a 4x4 board still showed respectable performance on larger board sizes, exhibiting a _graceful_ decline. 
 
-Another set of experiments were performed to compare the time to converge for agents trained from scratch, as a function of board size. Surprisingly, larger board sizes were associated with faster convergence. Below, the orange trace shows episode reward on a 4x4 board, blue on a 5x5 board, and pink on a 6x6 board.
+Another set of experiments was performed to compare the time to converge for agents trained from scratch, as a function of board size. Surprisingly, larger board sizes were associated with faster convergence. Below, the orange trace shows episode reward on a 4x4 board, blue on a 5x5 board, and pink on a 6x6 board.
 
 ![](../images/ConvergenceVsBoardSize.png)
 
 On viewing some of the playouts of these games, we discovered that larger boards resulted in faster convergence due to a pathological behavior of the RandomAgent opponent, which chose actions randomly. On a larger board, it is less likely for an opponent to place a bomb near our trained agent. Our agent quickly learned to recede to a corner and wait for its opponent to commit suicide.
 
 #### Environmental obstacles
-Environmental board size curriculum refers to a sequence of 6 training lessons in a fixed-size board with increasing number of destructible boxes. We designed such a curriculum in a 6x6 board with 2, 4, 6, 8, 10, 12 destructible boxes respectively. We reward the agent for destruct each box, but the overall reward of destructing all of the boxes is only 1/10 of killing an opponent. Therefore, the agent would not stay too long on the board and risk its life on destructing boxes. We also reward the agent for finish quickly, that is, gives a small negative reward each timestep to the agent. In our initial training, we decided to train our agent against a static agent because we want our agent to learn to actually drop bomb and kill the opponent. Thus, our curriculum set up is the following:
 
-| Lesson | Number of destructible boxes | board size |   opponent   |
-|:------:|:----------------------------:|:----------:|:------------:|
-|    0   |               2              |     6x6    | static agent |
-|    1   |               4              |     6x6    | static agent |
-|    2   |               6              |     6x6    | static agent |
-|    3   |               8              |     6x6    | static agent |
-|    4   |              10              |     6x6    | static agent |
-|    5   |              12              |     6x6    | static agent |
+We also varied the nature and density of the obstacles encountered by the agents in a progressive curriculum from few/no obstructions to occupying the majority of the board. 
 
 ![](../images/curric-box.gif)
-Our curriculum in 11x11 board
 
-After training each lesson on 5 million iterations, we get an agent that learns the "first taste of blood". It learns how to approach the agent, drop a bomb, kill the opponent, and escape to avoid killing itself. In addition, with randomization of the starting position of all of the agents and positions of the destructible boxes, it turns out that our trained agent can also find where the opponent is.
-![](../images/5M_lesson5_customCNN.gif)
-Out agent learns the first taste of blood
 
-![](../images/6x6_curriculum_reward.JPG)
-Reward curve
 
-Even in a larger board with more boxes, our trained agent can still find a reasonably short path to the opponent and kill it efficiently.
-![](../images/11x11_currculum_empty.gif)
-![](../images/11x11_currculum_box.gif)
 
 ### Network Architecture
 
