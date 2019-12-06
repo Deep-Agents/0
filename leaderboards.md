@@ -10,4 +10,4 @@ Agents are made to compete in the following contests for 100 episodes each and t
 
 1. Agent and static agent vs Two random agents
 
-![](../images/res1.png)
+![](../images/res_1.png)
