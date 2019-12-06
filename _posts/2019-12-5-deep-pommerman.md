@@ -95,7 +95,7 @@ Training efficiency increased notably with our CNN architecture as compared to o
 
 We were able to beat the baseline deterministic agent, SimpleAgent, consistently with most of our trained agents. A detailed review of each agent's performance can be seen on our [Leaderboard](/leaderboards/). In the short playthrough below, the Skynet6407 team (red) beats a team of 2 SimpleAgents (blue) by trapping the first one, and then tricking the second one.
 
-![Skynet6407 winning against SimpleAgent](skynet6407vsSimpleAgent.gif)
+![Skynet6407 winning against SimpleAgent](../images/skynet6407vsSimpleAgent.gif)
 
 
 The Skynet agent we trained ourselves from scratch, combining their reward structure with our curriculum, also achieved marginally better performance than the agent they entered in last year's competition, though in matches against each other, both agents usually tie as the action filter they use tends to make them over-cautious. One interesting note is that our version tends to complete matches faster/is slightly more aggressive--this is likely because we had it train so much against non-moving agents with fewer timesteps given before the end of each episode.
