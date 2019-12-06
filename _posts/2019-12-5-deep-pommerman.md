@@ -3,7 +3,7 @@ layout: post
 title: Solving Pommerman with Deep Reinforcement Learning
 ---
 
-Reinforcement learning has been used to solve a number of challenging games recently. That said, there are many games that are as of yet unsolved or require a lot of domain knowledge in order to create intelligent agents. Pommerman, a bomberman clone ([further described here](/pom_info/)) provides a simple environment with fun and intuitive dynamics which are surprisingly deep.
+Reinforcement learning has been used to solve a number of challenging games recently. That said, there are many games that are as of yet unsolved or require a lot of domain knowledge in order to create intelligent agents. Pommerman, a bomberman clone ([further described here](/pom_info/)) provides a simple environment with fun and intuitive dynamics which are surprisingly deep. In Pommerman, players must place bombs to destroy boxes and each other. Bombs are all timed, blowing up after a short time. When time runs out or only 1 team/player is left, the game ends. More information on the details of the Pommerman environment and annual NeurIPS competition can be found [at the official website](https://www.pommerman.com/).
 
 # Problem Summary
 
@@ -107,9 +107,12 @@ Even in a larger board with more boxes, our trained agent can still find a reaso
 
 ### Network Architecture
 
-Not all neural networks are equal! Some networks seemed to learn our curriculum with fewer episodes as compared to others. One key improvement we made was based on the positional relation of our observational data. Though our observation space is discrete, it can be thought of in a similar way as images, thus CNNs seem like a natural fit.
+Not all neural networks are equal! Some networks seemed to learn our curriculum with fewer episodes as compared to others. One key improvement we made was based on the positional relation of our observational data. Though our observation space is discrete, it can be thought of in a similar way as images, thus CNNs seem like a natural fit. 
+
+However, the environment contained both spatial and non-spatial data. Stable Baselines, the RL library that we used, can't pass multiple data types from the environment to the model, as it currently does not support tuples. Thus, it seemed as though we would have to cut out the non-spatial information. We got around this limitation, however, by flattening all of the environment data, then splitting it back up and reconstructing the boards on the tensorflow side. The boards were fed into the convolutional layers, and the non-spatial data was appended to the first fully connected layer, as shown below. 
 ![](../images/CNN-arch.png)
-Training efficiency increased notably with our CNN architecture as compared to our fully connected layer architecture.
+Training efficiency increased notably with our CNN architecture as compared to our fully connected layer architecture, and agents were able to make it farther into the curriculum before plateauing. 
+
 
 # Results
 
