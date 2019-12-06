@@ -90,14 +90,56 @@ We also varied the nature and density of the obstacles encountered by the agents
 
 Environmental board size curriculum refers to a sequence of 6 training lessons in a fixed-size board with increasing number of destructible boxes. We designed such a curriculum in a 6x6 board with 2, 4, 6, 8, 10, 12 destructible boxes respectively. We reward the agent for destruct each box, but the overall reward of destructing all of the boxes is only 1/10 of killing an opponent. Therefore, the agent would not stay too long on the board and risk its life on destructing boxes. We also reward the agent for finish quickly, that is, gives a small negative reward each timestep to the agent. In our initial training, we decided to train our agent against a static agent because we want our agent to learn to actually drop bomb and kill the opponent. Thus, our curriculum set up is the following:
 
-| Lesson | Number of destructible boxes | board size |   opponent   |
-|:------:|:----------------------------:|:----------:|:------------:|
-|    0   |               2              |     6x6    | static agent |
-|    1   |               4              |     6x6    | static agent |
-|    2   |               6              |     6x6    | static agent |
-|    3   |               8              |     6x6    | static agent |
-|    4   |              10              |     6x6    | static agent |
-|    5   |              12              |     6x6    | static agent |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-c3ow">Lesson</th>
+    <th class="tg-c3ow">Number of destructible boxes</th>
+    <th class="tg-c3ow">board size</th>
+    <th class="tg-c3ow">opponent</th>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow">6x6</td>
+    <td class="tg-c3ow">static agent</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">1</td>
+    <td class="tg-c3ow">4</td>
+    <td class="tg-c3ow">6x6</td>
+    <td class="tg-c3ow">static agent</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow">6</td>
+    <td class="tg-c3ow">6x6</td>
+    <td class="tg-c3ow">static agent</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">3</td>
+    <td class="tg-c3ow">8</td>
+    <td class="tg-c3ow">6x6</td>
+    <td class="tg-c3ow">static agent</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">4</td>
+    <td class="tg-c3ow">10</td>
+    <td class="tg-c3ow">6x6</td>
+    <td class="tg-c3ow">static agent</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">5</td>
+    <td class="tg-c3ow">12</td>
+    <td class="tg-c3ow">6x6</td>
+    <td class="tg-c3ow">static agent</td>
+  </tr>
+</table>
 
 ![](../images/curric-box.gif)
 Our curriculum in 11x11 board
